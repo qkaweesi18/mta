@@ -1,0 +1,41 @@
+{
+  "name": "react-example",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "next dev -H 0.0.0.0 -p 3000",
+    "build": "next build",
+    "start": "next start -H 0.0.0.0 -p 3000",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.14.0",
+    "@libsql/win32-x64-msvc": "^0.5.29",
+    "@tailwindcss/postcss": "^4.0.6",
+    "@types/uuid": "^10.0.0",
+    "bcryptjs": "^2.4.3",
+    "clsx": "^2.1.1",
+    "drizzle-orm": "^0.39.3",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.475.0",
+    "next": "15.1.7",
+    "postcss": "^8.5.2",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "tailwind-merge": "^3.0.1",
+    "tailwindcss": "^4.0.6",
+    "uuid": "^14.0.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/oxide-win32-x64-msvc": "^4.3.3",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.8",
+    "@types/node": "^22.13.4",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^15.1.7",
+    "lightningcss-win32-x64-msvc": "^1.33.0",
+    "typescript": "^5.7.3"
+  }
+}
