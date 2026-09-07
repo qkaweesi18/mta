@@ -1,31 +1,11 @@
-import { createClient } from '@libsql/client';
-import { drizzle } from 'drizzle-orm/libsql';
+import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-http';
 import * as schema from './schema';
 
-const databaseUrl = process.env.DATABASE_URL || 'file:local.db';
-const databaseAuthToken = process.env.DATABASE_AUTH_TOKEN;
-const client = createClient({
-  url: databaseUrl,
-  ...(databaseAuthToken ? { authToken: databaseAuthToken } : {}),
-});
-export const db = drizzle(client, { schema });
+const databaseUrl = process.env.DATABASE_URL;
 
-// Initialize database schema
-client.execute(`
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email TEXT NOT NULL UNIQUE,
-    password TEXT NOT NULL
-  );
-`);
+if (!databaseUrl) {
+  throw new Error('DATABASE_URL must be configured');
+}
 
-client.execute(`
-  CREATE TABLE IF NOT EXISTS tasks (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL,
-    title TEXT NOT NULL,
-    description TEXT,
-    status TEXT NOT NULL DEFAULT 'Todo',
-    FOREIGN KEY(user_id) REFERENCES users(id)
-  );
-`);
+export const db = drizzle(neon(databaseUrl), { schema });

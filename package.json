@@ -8,11 +8,12 @@
   "scripts": {
     "dev": "next dev -H 0.0.0.0 -p 3000",
     "build": "next build",
+    "db:setup": "node scripts/setup-db.mjs",
     "start": "next start -H 0.0.0.0 -p 3000",
     "lint": "next lint"
   },
   "dependencies": {
-    "@libsql/client": "^0.14.0",
+    "@neondatabase/serverless": "^1.0.2",
     "@tailwindcss/postcss": "^4.0.6",
     "@types/uuid": "^10.0.0",
     "bcryptjs": "^2.4.3",
