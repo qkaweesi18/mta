@@ -79,6 +79,8 @@ erDiagram
    ```env
    JWT_SECRET="your-super-secret-jwt-key"
    ```
+   For production, set `DATABASE_URL` and `DATABASE_AUTH_TOKEN` to a hosted
+   libSQL/Turso database. The local `local.db` file is only for development.
    Google, Facebook, and Pinterest buttons use the built-in local mock callback when
    provider client IDs are not configured, so local testing does not require logging
    in to Google.
