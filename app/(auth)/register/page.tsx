@@ -82,7 +82,12 @@ export default function RegisterPage() {
               />
             </div>
             <div>
-              <label className="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">Password</label>
+              <label className="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">
+                Password
+              </label>
+              <div className="mb-3 border border-white/10 bg-white/5 p-3 text-[10px] uppercase tracking-wider text-gray-400">
+                Required: 12+ characters, uppercase letter, lowercase letter, number, and symbol.
+              </div>
               <input
                 type="password"
                 required
@@ -93,9 +98,6 @@ export default function RegisterPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <p className="mt-2 text-[10px] uppercase tracking-wider text-gray-500">
-                Use 12+ characters with uppercase, lowercase, number, and symbol.
-              </p>
             </div>
             <div>
               <label className="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">Confirm password</label>
