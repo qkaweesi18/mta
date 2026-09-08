@@ -2,6 +2,15 @@
 
 This repository contains a full-stack Task Management Application developed as **Task 1** for the **EncoderX Remote Internship** (Track: Full Stack Development).
 
+## License and Copyright
+
+Copyright (c) 2026 qkaweesi18. All rights reserved. The original application
+source code, documentation, and design in this repository are proprietary and
+may not be used, copied, modified, or distributed without prior written
+permission. See [LICENSE](./LICENSE) for the complete terms.
+
+Third-party dependencies remain subject to their own licenses.
+
 ## 🎯 Objective
 The application is a full-featured CRUD (Create, Read, Update, Delete) system that synchronizes frontend state with backend logic. It features data persistence, user registration, login protocols, protected API routes, and a seamless data-fetching routine presented in an ultra-modern "Bold Typography" aesthetic.
 
