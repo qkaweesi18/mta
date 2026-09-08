@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Loader2 } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import SocialAuthButtons from "../components/SocialAuthButtons";
 
 export default function RegisterPage() {
@@ -14,6 +14,13 @@ export default function RegisterPage() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const passwordRequirements = [
+    { label: "12 or more characters", met: password.length >= 12 },
+    { label: "An uppercase letter", met: /[A-Z]/.test(password) },
+    { label: "A lowercase letter", met: /[a-z]/.test(password) },
+    { label: "A number", met: /[0-9]/.test(password) },
+    { label: "A symbol", met: /[^A-Za-z0-9]/.test(password) },
+  ];
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -98,6 +105,27 @@ export default function RegisterPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <ul className="mt-3 space-y-1.5" aria-label="Password requirements">
+                {passwordRequirements.map((requirement) => (
+                  <li
+                    key={requirement.label}
+                    className={`flex items-center gap-2 text-[10px] uppercase tracking-wider ${
+                      requirement.met ? "text-green-400" : "text-gray-500"
+                    }`}
+                  >
+                    <span
+                      className={`flex h-4 w-4 items-center justify-center rounded-full border ${
+                        requirement.met
+                          ? "border-green-400 bg-green-400 text-black"
+                          : "border-gray-600"
+                      }`}
+                    >
+                      {requirement.met && <Check className="h-3 w-3" aria-hidden="true" />}
+                    </span>
+                    {requirement.label}
+                  </li>
+                ))}
+              </ul>
             </div>
             <div>
               <label className="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">Confirm password</label>
