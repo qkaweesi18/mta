@@ -1,10 +1,30 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function SocialAuthButtons() {
   const router = useRouter();
+  const [guestLoading, setGuestLoading] = useState(false);
+  const [guestError, setGuestError] = useState("");
+
+  const handleGuestLogin = async () => {
+    setGuestLoading(true);
+    setGuestError("");
+    try {
+      const response = await fetch("/api/auth/guest", { method: "POST" });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "Guest access failed");
+      }
+      localStorage.setItem("token", data.token);
+      router.push("/dashboard");
+    } catch (error) {
+      setGuestError(error instanceof Error ? error.message : "Guest access failed");
+    } finally {
+      setGuestLoading(false);
+    }
+  };
 
   const handleSocialLogin = async (provider: string) => {
     try {
@@ -33,9 +53,7 @@ export default function SocialAuthButtons() {
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
-      // Validate origin is from AI Studio preview or localhost
-      const origin = event.origin;
-      if (!origin.endsWith('.run.app') && !origin.includes('localhost')) {
+      if (event.origin !== window.location.origin) {
         return;
       }
       
@@ -54,6 +72,15 @@ export default function SocialAuthButtons() {
 
   return (
     <div className="mt-6 space-y-4">
+      <button
+        type="button"
+        onClick={handleGuestLogin}
+        disabled={guestLoading}
+        className="w-full border border-white/20 py-3 text-xs font-bold tracking-widest uppercase text-white hover:bg-white/10 disabled:opacity-60 transition-colors"
+      >
+        {guestLoading ? "Creating guest profile..." : "Continue as Guest"}
+      </button>
+      {guestError && <p className="text-center text-xs text-red-400">{guestError}</p>}
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-white/10"></div>

@@ -97,6 +97,7 @@ erDiagram
 The deployed application was verified at https://mta-task-app.vercel.app using browser-based QA and live API checks:
 
 - Registration and login
+- Persistent guest profile creation
 - Protected API rejection without authentication
 - Create, read, update, and delete task operations
 - Task status movement between Todo, In Progress, and Done
