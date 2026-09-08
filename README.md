@@ -6,9 +6,8 @@ This repository contains a full-stack Task Management Application developed as *
 The application is a full-featured CRUD (Create, Read, Update, Delete) system that synchronizes frontend state with backend logic. It features data persistence, user registration, login protocols, protected API routes, and a seamless data-fetching routine presented in an ultra-modern "Bold Typography" aesthetic.
 
 ## 🚀 Tech Stack
-- **Frontend**: Next.js 15 (React 19), Tailwind CSS v4, Lucide React
-- **Backend**: Next.js App Router (API Routes)
-- **Database**: SQLite (local.db) managed via Drizzle ORM & `@libsql/client`
+- **Frontend & Backend**: Next.js 15 (React 19), App Router API routes, Tailwind CSS v4, Lucide React
+- **Database**: Neon PostgreSQL managed via Drizzle ORM
 - **Authentication**: JWT (JSON Web Tokens), `bcryptjs` for secure password hashing
 - **Styling**: Tailwind CSS (Custom High-Contrast Dark Theme)
 
@@ -17,7 +16,7 @@ The application is a full-featured CRUD (Create, Read, Update, Delete) system th
 ### 1. Registration & Authentication Workflow
 The application secures user data using industry-standard JWT authentication.
 1. **Sign Up**: Users navigate to the `/register` page and provide an email and password.
-   - The backend validates the input and securely hashes the password using `bcryptjs` (salt rounds: 10) before saving it to the SQLite database.
+   - The backend validates the input and securely hashes the password using `bcryptjs` (salt rounds: 10) before saving it to PostgreSQL.
    - Alternatively, users can use the simulated OAuth options (Google, Facebook, Pinterest) which securely map an identity and provision a backend user automatically.
 2. **Sign In**: Returning users authenticate via `/login`.
    - The backend compares the provided password with the stored hash.
@@ -32,7 +31,7 @@ Authenticated users are redirected to the Dashboard where they manage their task
 
 ## 🗄️ Database Schema Diagram
 
-The database is built on a relational structure using SQLite and Drizzle ORM.
+The database is built on a relational structure using Neon PostgreSQL and Drizzle ORM.
 
 ```mermaid
 erDiagram
@@ -93,9 +92,20 @@ erDiagram
 4. **Access the App:**
    Open `http://localhost:3000` in your browser.
 
+## ✅ Verification
+
+The deployed application was verified at https://mta-task-app.vercel.app using browser-based QA and live API checks:
+
+- Registration and login
+- Protected API rejection without authentication
+- Create, read, update, and delete task operations
+- Task status movement between Todo, In Progress, and Done
+- User logout and session invalidation
+- Local mock OAuth callback without Google login
+
 ## 📁 Deliverables Included
-- [x] Source Code (Frontend & Backend merged in Next.js App Router)
-- [x] Live Deployment URL (Refer to hosting platform)
+- [x] Source Code (Frontend & Backend in Next.js App Router)
+- [x] Live Deployment URL (`https://mta-task-app.vercel.app`)
 - [x] Database Schema Diagram (Included in this README)
 - [x] Postman API Collection Documentation (`postman_collection.json` included in repository)
 - [x] Professional README.md
