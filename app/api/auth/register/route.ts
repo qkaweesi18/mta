@@ -8,14 +8,25 @@ import { cookies } from 'next/headers';
 
 export async function POST(request: Request) {
   try {
-    const { email, password } = await request.json();
+    const { email, confirmEmail, password, confirmPassword } = await request.json();
 
     if (!email || !password) {
       return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
     }
+    if (email.trim().toLowerCase() !== confirmEmail?.trim().toLowerCase()) {
+      return NextResponse.json({ error: 'Email addresses do not match' }, { status: 400 });
+    }
+    if (password !== confirmPassword) {
+      return NextResponse.json({ error: 'Passwords do not match' }, { status: 400 });
+    }
+    if (password.length < 8) {
+      return NextResponse.json({ error: 'Password must be at least 8 characters' }, { status: 400 });
+    }
+
+    const normalizedEmail = email.trim().toLowerCase();
 
     // Check if user already exists
-    const existingUsers = await db.select().from(users).where(eq(users.email, email));
+    const existingUsers = await db.select().from(users).where(eq(users.email, normalizedEmail));
     if (existingUsers.length > 0) {
       return NextResponse.json({ error: 'User already exists' }, { status: 409 });
     }
@@ -24,7 +35,7 @@ export async function POST(request: Request) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Insert user
-    const result = await db.insert(users).values({ email, password: hashedPassword }).returning();
+    const result = await db.insert(users).values({ email: normalizedEmail, password: hashedPassword }).returning();
     const user = result[0];
 
     // Generate token

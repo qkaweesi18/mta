@@ -8,7 +8,9 @@ import SocialAuthButtons from "../components/SocialAuthButtons";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
+  const [confirmEmail, setConfirmEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -22,7 +24,7 @@ export default function RegisterPage() {
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, confirmEmail, password, confirmPassword }),
       });
 
       const data = await res.json();
@@ -69,14 +71,38 @@ export default function RegisterPage() {
               />
             </div>
             <div>
+              <label className="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">Confirm email address</label>
+              <input
+                type="email"
+                required
+                className="appearance-none relative block w-full px-4 py-3 bg-white/5 border border-white/10 placeholder-gray-600 text-white focus:outline-none focus:ring-1 focus:ring-white focus:border-white focus:z-10 sm:text-sm transition-colors"
+                placeholder="CONFIRM EMAIL ADDRESS"
+                value={confirmEmail}
+                onChange={(e) => setConfirmEmail(e.target.value)}
+              />
+            </div>
+            <div>
               <label className="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">Password</label>
               <input
                 type="password"
                 required
+                minLength={8}
                 className="appearance-none relative block w-full px-4 py-3 bg-white/5 border border-white/10 placeholder-gray-600 text-white focus:outline-none focus:ring-1 focus:ring-white focus:border-white focus:z-10 sm:text-sm transition-colors"
                 placeholder="PASSWORD"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">Confirm password</label>
+              <input
+                type="password"
+                required
+                minLength={8}
+                className="appearance-none relative block w-full px-4 py-3 bg-white/5 border border-white/10 placeholder-gray-600 text-white focus:outline-none focus:ring-1 focus:ring-white focus:border-white focus:z-10 sm:text-sm transition-colors"
+                placeholder="CONFIRM PASSWORD"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
           </div>

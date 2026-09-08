@@ -15,7 +15,8 @@ export async function POST(request: Request) {
     }
 
     // Find user
-    const result = await db.select().from(users).where(eq(users.email, email));
+    const normalizedEmail = email.trim().toLowerCase();
+    const result = await db.select().from(users).where(eq(users.email, normalizedEmail));
     const user = result[0];
 
     if (!user) {

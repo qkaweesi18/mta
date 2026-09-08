@@ -97,12 +97,16 @@ erDiagram
 The deployed application was verified at https://mta-task-app.vercel.app using browser-based QA and live API checks:
 
 - Registration and login
+- Matching email and password confirmation during registration
 - Persistent guest profile creation
 - Protected API rejection without authentication
 - Create, read, update, and delete task operations
 - Task status movement between Todo, In Progress, and Done
 - User logout and session invalidation
 - Local mock OAuth callback without Google login
+
+Email verification and password-reset email delivery are not enabled yet; they
+require a transactional email provider such as Resend or SendGrid.
 
 ## 📁 Deliverables Included
 - [x] Source Code (Frontend & Backend in Next.js App Router)
