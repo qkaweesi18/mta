@@ -98,6 +98,7 @@ The deployed application was verified at https://mta-task-app.vercel.app using b
 
 - Registration and login
 - Matching email and password confirmation during registration
+- Strong password policy: 12+ characters with uppercase, lowercase, number, and symbol
 - Persistent guest profile creation
 - Protected API rejection without authentication
 - Create, read, update, and delete task operations

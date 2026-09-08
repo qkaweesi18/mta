@@ -86,19 +86,24 @@ export default function RegisterPage() {
               <input
                 type="password"
                 required
-                minLength={8}
+                minLength={12}
+                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{12,}"
                 className="appearance-none relative block w-full px-4 py-3 bg-white/5 border border-white/10 placeholder-gray-600 text-white focus:outline-none focus:ring-1 focus:ring-white focus:border-white focus:z-10 sm:text-sm transition-colors"
                 placeholder="PASSWORD"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <p className="mt-2 text-[10px] uppercase tracking-wider text-gray-500">
+                Use 12+ characters with uppercase, lowercase, number, and symbol.
+              </p>
             </div>
             <div>
               <label className="block text-xs font-bold tracking-widest uppercase text-gray-500 mb-2">Confirm password</label>
               <input
                 type="password"
                 required
-                minLength={8}
+                minLength={12}
+                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{12,}"
                 className="appearance-none relative block w-full px-4 py-3 bg-white/5 border border-white/10 placeholder-gray-600 text-white focus:outline-none focus:ring-1 focus:ring-white focus:border-white focus:z-10 sm:text-sm transition-colors"
                 placeholder="CONFIRM PASSWORD"
                 value={confirmPassword}
